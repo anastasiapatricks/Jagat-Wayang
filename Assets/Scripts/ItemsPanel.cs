@@ -20,7 +20,7 @@ public class ItemsPanel : MonoBehaviour
 
         foreach (var item in items) {
             GameObject clone = Instantiate(itemIcon, transform);
-            clone.GetComponent<Image>().sprite = item.sprite;
+            //clone.GetComponent<Image>().sprite = item.sprite;
         }
 
         if (transform.childCount > 0) {

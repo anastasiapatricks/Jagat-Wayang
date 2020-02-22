@@ -14,6 +14,8 @@ public class CutsceneManager : MonoBehaviour
     public TextMeshProUGUI characterName;
     public TextMeshProUGUI dialog;
 
+    public Color greyOutColor = Color.grey;
+
     void Start()
     {
         ShowScene(sceneNumber);
@@ -33,15 +35,25 @@ public class CutsceneManager : MonoBehaviour
         }
     }
 
+    void ShowScene(int sceneNumber) {
+        Scene scene = scenes[sceneNumber];
+
+        scene.gameObject.SetActive(true);
+
+        characterName.text = scene.characterName;
+        dialog.text = scene.dialog;
+
+        if (scene.leftSprite != null && scene.leftGreyOut) {
+            scene.leftSprite.color = greyOutColor;
+        }
+
+        if (scene.rightSprite != null && scene.rightGreyOut) {
+            scene.rightSprite.color = greyOutColor;
+        }
+    }
+
     void ClearScene(int sceneNumber) {
         Scene scene = scenes[sceneNumber];
         scene.gameObject.SetActive(false);
-    }
-
-    void ShowScene(int sceneNumber) {
-        Scene scene = scenes[sceneNumber];
-        scene.gameObject.SetActive(true);
-        characterName.text = scene.characterName;
-        dialog.text = scene.dialog;
     }
 }

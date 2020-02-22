@@ -3,31 +3,31 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Item {
+public class ItemA {
     public string name;
     public Sprite sprite;
 
-    public Item(string name, Sprite sprite) {
+    public ItemA(string name, Sprite sprite) {
         this.name = name;
         this.sprite = sprite;
     }
 }
 
-public class Inventory {
-    public List<Item> items = new List<Item>();
+//public class InventoryA {
+//    public List<ItemA> items = new List<ItemA>();
 
-    public void AddItem(string name) {
-        Sprite sprite = UIManager.Instance.itemSpriteMap[name];
-        Item item = new Item(name, sprite);
+//    public void AddItem(string name) {
+//        Sprite sprite = UIManager.Instance.itemSpriteMap[name];
+//        ItemA item = new ItemA(name, sprite);
 
-        items.Add(item);
-        UIManager.Instance.UpdatePanel(items.ToArray());
-    }
+//        items.Add(item);
+//        UIManager.Instance.UpdatePanel(items.ToArray());
+//    }
 
-    public Item GetItem(string name) {
-        return items.Find(item => item.name == name);
-    }
-}
+//    public Item GetItem(string name) {
+//        return items.Find(item => item.name == name);
+//    }
+//}
 
 public class PlayerUnit : MovableGameUnit {
     // private Rigidbody rb;
@@ -39,7 +39,7 @@ public class PlayerUnit : MovableGameUnit {
     public float walkTime = 0.5f;
     private Animator animator;
 
-    public Inventory inventory = new Inventory();
+    //public InventoryA inventory = new InventoryA();
 
     // Start is called before the first frame update
     void Start()
@@ -132,8 +132,8 @@ public class PlayerUnit : MovableGameUnit {
             else if (nextUnit.unitType == UnitType.Collectible) {
                 map.MoveUnit(this, newPos);
                 Destroy(nextUnit.gameObject);
-                float val = Random.value;
-                inventory.AddItem(val < 0.2 ? "wood" : val < 0.4 ? "hide" : val < 0.6 ? "arjuna_blueprint" : val < 0.8 ? "red_paint" : "black_paint");
+                //float val = Random.value;
+                //inventory.AddItem(val < 0.2 ? "wood" : val < 0.4 ? "hide" : val < 0.6 ? "arjuna_blueprint" : val < 0.8 ? "red_paint" : "black_paint");
             } else {
                 // Wall in front
                 return;
