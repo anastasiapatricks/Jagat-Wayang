@@ -215,13 +215,4 @@ public class TileMap : MonoBehaviour {
             potentialTiles[i].SetUnsafeState(UnsafeState.Next);
         }
     }
-
-    public void CheckTransition() {
-        if (tiles[4,6].unit.unitType == UnitType.Character && tiles[9,6].unit.unitType == UnitType.Character) {
-            print("heh");
-            if (((CharacterUnit) tiles[4,6].unit).characterName == "Dursasana" && ((CharacterUnit)tiles[9,6].unit).characterName == "Arjuna") {
-                GameManager.Instance.LoadScene("heh");
-            }
-        }
-    }
 }

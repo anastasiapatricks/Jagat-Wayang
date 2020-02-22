@@ -54,8 +54,6 @@ public class PlayerUnit : MovableGameUnit {
     void Update()
     {
         UpdateMovement();
-        TileMap.Instance.CheckTransition();
-        print("heh");
     }
 
     public override void Move(Vector2Int newPos) {
