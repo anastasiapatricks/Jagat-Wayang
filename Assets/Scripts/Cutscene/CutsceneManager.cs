@@ -7,7 +7,6 @@ using UnityEngine.Events;
 public class CutsceneManager : MonoBehaviour
 {
     public int sceneNumber = 0;
-    public Scene[] scenes;
 
     public UnityEvent onFinish;
 
@@ -26,7 +25,7 @@ public class CutsceneManager : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0)) {
             sceneNumber++;
-            if (sceneNumber < scenes.Length) {
+            if (sceneNumber < transform.childCount) {
                 ClearScene(sceneNumber - 1);
                 ShowScene(sceneNumber);
             } else {
@@ -36,7 +35,7 @@ public class CutsceneManager : MonoBehaviour
     }
 
     void ShowScene(int sceneNumber) {
-        Scene scene = scenes[sceneNumber];
+        Scene scene = transform.GetChild(sceneNumber).GetComponent<Scene>();
 
         scene.gameObject.SetActive(true);
 
@@ -53,7 +52,7 @@ public class CutsceneManager : MonoBehaviour
     }
 
     void ClearScene(int sceneNumber) {
-        Scene scene = scenes[sceneNumber];
+        Scene scene = transform.GetChild(sceneNumber).GetComponent<Scene>();
         scene.gameObject.SetActive(false);
     }
 }
