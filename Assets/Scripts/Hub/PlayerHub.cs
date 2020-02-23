@@ -9,6 +9,9 @@ public class PlayerHub : MonoBehaviour
 
     private Rigidbody rigidBody;
     private Animator animator;
+    
+    public int facingDirection = 0;
+    public int front = 0, back = 1, left = 2, right = 3;
 
     // Start is called before the first frame update
     void Start()
@@ -23,12 +26,21 @@ public class PlayerHub : MonoBehaviour
         Vector3 moveDirection = new Vector3(Input.GetAxis("Horizontal"), 0.0f, Input.GetAxis("Vertical"));
 
         animator.SetBool("isWalking", moveDirection != Vector3.zero);
+        
+        if (moveDirection.z > 0) {
+            animator.SetInteger("facingDirection", back);
+        } else if (moveDirection.z < 0) {
+            animator.SetInteger("facingDirection", front);
+        }
 
-        
-        //if (moveDirection != Vector3.zero) {
-            rigidBody.velocity = moveDirection * Time.deltaTime * speed;
-            animator.SetFloat("moveX", moveDirection.x);
-            animator.SetFloat("moveY", moveDirection.z);
-        
+        if (moveDirection.x < 0) {
+            animator.SetInteger("facingDirection", left);
+        } else if (moveDirection.x > 0) {
+            animator.SetInteger("facingDirection", right);
+        }
+
+        rigidBody.velocity = moveDirection * Time.deltaTime * speed;
+
+        // print(rigidBody.velocity);
     }
 }
