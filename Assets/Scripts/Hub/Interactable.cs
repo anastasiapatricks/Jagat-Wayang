@@ -33,6 +33,8 @@ public class Interactable : MonoBehaviour
     }
 
     private bool InsideRange() {
-        return Vector2.Distance(transform.position, player.transform.position) < minDistance;
+        Vector2 self = new Vector2(transform.position.x, transform.position.z);
+        Vector2 playerPos = new Vector2(player.transform.position.x, player.transform.position.z);
+        return Vector2.Distance(self, playerPos) < minDistance;
     }
 }

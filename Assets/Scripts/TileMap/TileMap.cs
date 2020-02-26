@@ -215,4 +215,15 @@ public class TileMap : MonoBehaviour {
             potentialTiles[i].SetUnsafeState(UnsafeState.Next);
         }
     }
+
+    public void CheckTransition() {
+        GameUnit dursasanaUnit = tiles[3, 6].unit;
+        GameUnit arjunaUnit = tiles[7, 6].unit;
+        if (dursasanaUnit != null && arjunaUnit != null && dursasanaUnit.unitType == UnitType.Character && arjunaUnit.unitType == UnitType.Character) {
+            if (((CharacterUnit) dursasanaUnit).characterName == "Dursasana" && ((CharacterUnit) arjunaUnit).characterName == "Arjuna") {
+                print("heh");
+                GameManager.Instance.LoadLevelLater("Battle", 1);
+            }
+        }
+    }
 }

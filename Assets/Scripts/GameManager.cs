@@ -29,4 +29,12 @@ public class GameManager : MonoBehaviour
     public void Quit() {
         Application.Quit();
     }
+
+    public void LoadLevelLater(string sceneName, float seconds) {
+        IEnumerator Load() {
+            yield return new WaitForSeconds(seconds);
+            SceneManager.LoadScene(sceneName);
+        }
+        StartCoroutine(Load());
+    }
 }

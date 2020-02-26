@@ -17,4 +17,16 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/CutsceneEnding.unity
     guid: 9d703d4356766c44b8732460da629cac
+  - enabled: 1
+    path: Assets/Scenes/Battle.unity
+    guid: 6b226f6444886f04cba56f85fc55b3ec
+  - enabled: 1
+    path: Assets/Scenes/Hub.unity
+    guid: c9034d9c3cebabf47818c4c92c3652be
+  - enabled: 1
+    path: Assets/Scenes/Level1.unity
+    guid: b5705ec83a63bd04dbc84b91ac00fe45
+  - enabled: 1
+    path: Assets/Scenes/TempleChambers.unity
+    guid: 7498c5426d9a2c1469d53ee36ecefe6c
   m_configObjects: {}

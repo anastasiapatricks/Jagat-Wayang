@@ -29,6 +29,7 @@ public class Player : MonoBehaviour {
     public float knockbackLength;
     public bool knockFromRight;
 
+    public string gameOverMessage = "YOU LOSE";
 
     // Use this for initialization
     void Start () {
@@ -114,6 +115,10 @@ public class Player : MonoBehaviour {
             // Die animation
             CreateAndDestroyLater(explosionRef, 1);
             Destroy(gameObject);
+
+            UIManager.Instance.DisplayPromptMessage(gameOverMessage);
+
+            GameManager.Instance.LoadLevelLater("Hub", 3);
 
             // Disable enemy
         }

@@ -37,7 +37,6 @@ public class PlayerUnit : MovableGameUnit {
     private TileMap map;
     
     public float walkTime = 0.5f;
-    private Animator animator;
 
     //public InventoryA inventory = new InventoryA();
 
@@ -47,7 +46,6 @@ public class PlayerUnit : MovableGameUnit {
         map = TileMap.Instance;
         map.SetUnit(this, pos);
         // myRigidBody = GetComponent<Rigidbody>();
-        animator = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -58,9 +56,7 @@ public class PlayerUnit : MovableGameUnit {
 
     public override void Move(Vector2Int newPos) {
         pos = newPos;
-        animator.SetBool("isWalking", true);
-        LeanTween.move(gameObject, ToWorldPos(newPos), walkTime)
-            .setOnComplete(() => animator.SetBool("isWalking", false));
+        LeanTween.move(gameObject, ToWorldPos(newPos), walkTime);
         Camera.main.GetComponent<CameraController>().Adjust(ToWorldPos(newPos));
     }
 
@@ -73,16 +69,16 @@ public class PlayerUnit : MovableGameUnit {
 
         if (Input.GetKey(KeyCode.UpArrow)) {
             offset = new Vector2Int(0, 1);
-            transform.rotation = Quaternion.Euler(0, 0, 0);
+            //transform.rotation = Quaternion.Euler(0, 0, 0);
         } else if (Input.GetKey(KeyCode.DownArrow)) {
             offset = new Vector2Int(0, -1);
-            transform.rotation = Quaternion.Euler(0, 180, 0);
+            //transform.rotation = Quaternion.Euler(0, 180, 0);
         } else if (Input.GetKey(KeyCode.RightArrow)) {
             offset = new Vector2Int(1, 0);
-            transform.rotation = Quaternion.Euler(0, 90, 0);
+            //transform.rotation = Quaternion.Euler(0, 90, 0);
         } else if (Input.GetKey(KeyCode.LeftArrow)) {
             offset = new Vector2Int(-1, 0);
-            transform.rotation = Quaternion.Euler(0, -90, 0);
+            //transform.rotation = Quaternion.Euler(0, -90, 0);
         } else {
             return;
         }
@@ -153,6 +149,7 @@ public class PlayerUnit : MovableGameUnit {
         }
 
         TileMap.Instance.NextState();
+        TileMap.Instance.CheckTransition();
 
     }
 }

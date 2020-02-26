@@ -118,7 +118,7 @@ public class PlayerCombat : MonoBehaviour
                     print("combo " + i);
                     animator.SetInteger("AttackState", comboList[i].Item3);
                     /*                Attack();*/
-                    currentAudience += 10f;
+                    currentAudience += 15f;
                     audience.value = currentAudience;
                     inputHistory.Clear();
                 }

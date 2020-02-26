@@ -27,8 +27,8 @@ public class Enemy : MonoBehaviour
     private Transform enemyScale;
     public float speed;
 
-/*    private Rigidbody2D body2D;
-*/    public float knockback;
+    // private Rigidbody2D body2D;
+    public float knockback;
     public float knockbackCount;
     public float knockbackLength;
     public bool knockFromRight;
@@ -104,6 +104,10 @@ public class Enemy : MonoBehaviour
             Destroy(gameObject);
 
             // Disable enemy
+            UIManager.Instance.DisplayPromptMessage("YOU WIN");
+
+            GameManager.Instance.LoadLevelLater("Hub", 3);
+
         }
     }
     void ResetMaterial()

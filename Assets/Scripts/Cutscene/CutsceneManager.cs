@@ -15,8 +15,11 @@ public class CutsceneManager : MonoBehaviour
 
     public Color greyOutColor = Color.grey;
 
+    private Transform sceneGroup;
+
     void Start()
     {
+        sceneGroup = transform.GetChild(0);
         ShowScene(sceneNumber);
     }
 
@@ -25,7 +28,7 @@ public class CutsceneManager : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0)) {
             sceneNumber++;
-            if (sceneNumber < transform.childCount) {
+            if (sceneNumber < sceneGroup.childCount) {
                 ClearScene(sceneNumber - 1);
                 ShowScene(sceneNumber);
             } else {
@@ -35,7 +38,7 @@ public class CutsceneManager : MonoBehaviour
     }
 
     void ShowScene(int sceneNumber) {
-        Scene scene = transform.GetChild(sceneNumber).GetComponent<Scene>();
+        Scene scene = sceneGroup.GetChild(sceneNumber).GetComponent<Scene>();
 
         scene.gameObject.SetActive(true);
 
@@ -52,7 +55,7 @@ public class CutsceneManager : MonoBehaviour
     }
 
     void ClearScene(int sceneNumber) {
-        Scene scene = transform.GetChild(sceneNumber).GetComponent<Scene>();
+        Scene scene = sceneGroup.GetChild(sceneNumber).GetComponent<Scene>();
         scene.gameObject.SetActive(false);
     }
 }
