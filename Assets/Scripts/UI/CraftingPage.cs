@@ -9,6 +9,8 @@ public class CraftingPage : MonoBehaviour
     MaterialItem wood, nyan;
     MaterialItem selectedMaterial;
 
+    public Transform woodButton, nyanButton;
+
     void SetSelectedMaterial(MaterialItem material)
     {
         selectedMaterial = material;
@@ -28,7 +30,6 @@ public class CraftingPage : MonoBehaviour
 
     void Start()
     {
-        Transform woodButton = transform.Find("Wood");
         wood = MaterialItem.CreateFromTemplate(
             "wood",
             new Vector2Int(50, 50),
@@ -37,7 +38,6 @@ public class CraftingPage : MonoBehaviour
             Vector2Int.zero);
         woodButton.GetComponent<Image>().sprite = wood.Sprite;
 
-        Transform nyanButton = transform.Find("Nyan");
         nyan = MaterialItem.CreateFromTemplate(
             "nyan",
             new Vector2Int(100, 100),
