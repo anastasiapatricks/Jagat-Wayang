@@ -6,6 +6,8 @@ public class PlayerHub : MonoBehaviour
 {
     public float speed;
     public KeyCode interactKey;
+    public KeyCode jumpKey;
+    public bool isStanding = true;
 
     private Rigidbody rigidBody;
     private Animator animator;
@@ -23,10 +25,12 @@ public class PlayerHub : MonoBehaviour
 
     void FixedUpdate()
     {
+        Physics.gravity = new Vector3(0, -50f, 0);
+
         Vector3 moveDirection = new Vector3(Input.GetAxis("Horizontal"), 0.0f, Input.GetAxis("Vertical"));
 
         animator.SetBool("isWalking", moveDirection != Vector3.zero);
-        
+
         if (moveDirection.z > 0) {
             animator.SetInteger("facingDirection", back);
         } else if (moveDirection.z < 0) {
@@ -41,6 +45,21 @@ public class PlayerHub : MonoBehaviour
 
         rigidBody.velocity = moveDirection * Time.deltaTime * speed;
 
+        if (Input.GetButtonDown("Jump") && isStanding) {
+            rigidBody.AddForce(new Vector3(0, 50, 0), ForceMode.Impulse);
+            isStanding = false;
+        }
+
         // print(rigidBody.velocity);
+
+    }
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.layer == 12)
+            {
+                isStanding = true;
+            }
     }
 }
+
+
