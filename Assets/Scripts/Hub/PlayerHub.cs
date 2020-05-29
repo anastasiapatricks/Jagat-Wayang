@@ -25,7 +25,7 @@ public class PlayerHub : MonoBehaviour
 
     void FixedUpdate()
     {
-        Physics.gravity = new Vector3(0, -50f, 0);
+        Physics.gravity = new Vector3(0, -75f, 0);
 
         Vector3 moveDirection = new Vector3(Input.GetAxis("Horizontal"), 0.0f, Input.GetAxis("Vertical"));
 
@@ -46,7 +46,7 @@ public class PlayerHub : MonoBehaviour
         rigidBody.velocity = moveDirection * Time.deltaTime * speed;
 
         if (Input.GetButtonDown("Jump") && isStanding) {
-            rigidBody.AddForce(new Vector3(0, 50, 0), ForceMode.Impulse);
+            rigidBody.AddForce(new Vector3(0, 250, 0), ForceMode.Impulse);
             isStanding = false;
         }
 

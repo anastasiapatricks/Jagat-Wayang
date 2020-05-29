@@ -18,6 +18,6 @@ public class DoorController : MonoBehaviour
     }
     private void OnDoorwayClose()
     {
-        LeanTween.moveLocalY(gameObject, 0.75f, 2f).setEaseInQuad();
+        LeanTween.moveLocalY(gameObject, 1.6f, 2f).setEaseInQuad();
     }
 }
