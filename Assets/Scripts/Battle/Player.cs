@@ -18,6 +18,7 @@ public class Player : MonoBehaviour {
     public Slider playerHealthBar;
     public int playerMaxHealth;
     private int playerCurrentHealth;
+    public Slider playerAudienceSatisfaction;
 
     public GameObject bloodEffect;
     public Animator camAnim;
@@ -92,6 +93,11 @@ public class Player : MonoBehaviour {
             
             knockbackCount -= Time.deltaTime;
         }
+
+        if (playerAudienceSatisfaction.value <= 0)
+        {
+            Die();
+        }
     }
 
     public void TakeDamage(int damage)
@@ -101,15 +107,15 @@ public class Player : MonoBehaviour {
         CreateAndDestroyLater(bloodEffect, 1);
         camAnim.SetTrigger("shake");
 
-
         if (playerCurrentHealth <= 0)
         {
             Die();
         }
 
 
-        void Die()
-        {
+    }
+    private void Die()
+    {
             Debug.Log("Player died");
 
             // Die animation
@@ -121,7 +127,6 @@ public class Player : MonoBehaviour {
             GameManager.Instance.LoadLevelLater("Hub", 3);
 
             // Disable enemy
-        }
     }
 
     private void CreateAndDestroyLater(GameObject prefab, float seconds)

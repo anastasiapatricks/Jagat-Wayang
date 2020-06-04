@@ -2959,6 +2959,11 @@ PrefabInstance:
       propertyPath: camAnim
       value: 
       objectReference: {fileID: 1289709554}
+    - target: {fileID: 5704724562624537758, guid: 050c19bcf61d6ac4fb1b299d0b365f20,
+        type: 3}
+      propertyPath: playerAudienceSatisfaction
+      value: 
+      objectReference: {fileID: 2117645189}
     - target: {fileID: 5704724562923595389, guid: 050c19bcf61d6ac4fb1b299d0b365f20,
         type: 3}
       propertyPath: m_LocalRotation.z
