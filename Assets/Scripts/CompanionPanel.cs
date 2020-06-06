@@ -1,20 +1,35 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Experimental.PlayerLoop;
 using UnityEngine.UI;
 
-public class CompanionPanel : MonoBehaviour
+public class CompanionPanel : UIComponent
 {
     public Sprite current, unselected;
 
     public Image invTab, craftTab;
     public GameObject invPage, craftPage;
 
-    public GameObject companionPanel;
+    private bool inFocus;
 
-    private void Update() {
-        if (Input.GetKey(KeyCode.Escape)) {
-            companionPanel.SetActive(false);
+    public override void Focus()
+    {
+        inFocus = true;
+        gameObject.SetActive(true);
+    }
+
+    public override void Blur()
+    {
+        inFocus = false;
+    }
+
+    void Update()
+    {
+        if (inFocus && Input.GetKey(KeyCode.Escape))
+        {
+            gameObject.SetActive(false);
+            UIManager.Instance.RemoveFocus();
         }
     }
 

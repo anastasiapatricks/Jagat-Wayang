@@ -16,11 +16,11 @@ public class ItemGrid : MonoBehaviour
 
     void Start()
     {
-        inventory = PlayerManager.Instance.inventory;
+        //inventory = PlayerManager.Instance.inventory;
 
-        FillCells();
-        newItemHandler = (item) => UpdateCellContent();
-        inventory.AddNewItemListener(newItemHandler);
+        //FillCells();
+        //newItemHandler = (item) => UpdateCellContent();
+        //inventory.AddNewItemListener(newItemHandler);
     }
 
     public void NextPage()

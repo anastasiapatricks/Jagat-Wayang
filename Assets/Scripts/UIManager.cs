@@ -5,7 +5,7 @@ using TMPro;
 using UnityEngine;
 
 [System.Serializable]
-public class ItemSpriteMap : SerializableDictionaryBase<string, Sprite> { }
+public class UIComponentMap : SerializableDictionaryBase<string, UIComponent> { }
 
 public class UIManager : MonoBehaviour
 {
@@ -22,16 +22,41 @@ public class UIManager : MonoBehaviour
         }
     }
 
-    public ItemsPanel itemsPanel;
-    public ItemSpriteMap itemSpriteMap;
-    public TextMeshProUGUI promptMessage;
-
-
-    public void UpdatePanel(Item[] items) {
-        itemsPanel.UpdateItems(items);
+    public UIComponentMap componentMap;
+    private Stack<UIComponent> focusStack = new Stack<UIComponent>();
+    public bool IsFocused()
+    {
+        return focusStack.Count > 0;
     }
 
-    public void DisplayPromptMessage(string message) {
-        promptMessage.text = message;
+    private void UpdateFocus()
+    {
+        foreach (UIComponent component in componentMap.Values)
+        {
+            component.Blur();
+        }
+        if (focusStack.Count > 0)
+        {
+            focusStack.Peek().Focus();
+        }
+    }
+
+    public void AddFocus(string componentName)
+    {
+        if (!componentMap.ContainsKey(componentName))
+        {
+            return;
+        }
+        focusStack.Push(componentMap[componentName]);
+        UpdateFocus();
+    }
+
+    public void RemoveFocus()
+    {
+        if (focusStack.Count > 0)
+        {
+            focusStack.Pop();
+        }
+        UpdateFocus();
     }
 }

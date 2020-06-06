@@ -122,7 +122,7 @@ public class Player : MonoBehaviour {
             CreateAndDestroyLater(explosionRef, 1);
             Destroy(gameObject);
 
-            UIManager.Instance.DisplayPromptMessage(gameOverMessage);
+            // UIManager.Instance.DisplayPromptMessage(gameOverMessage);
 
             GameManager.Instance.LoadLevelLater("Hub", 3);
 
