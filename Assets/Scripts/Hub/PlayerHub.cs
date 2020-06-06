@@ -5,28 +5,27 @@ using UnityEngine;
 public class PlayerHub : MonoBehaviour
 {
     public float speed;
-    public KeyCode interactKey;
-    public KeyCode jumpKey;
-    public bool isStanding = true;
+    public float jumpImpulse;
+
+    private bool isGrounded = true;
 
     private Rigidbody rigidBody;
+    private SpriteRenderer sprite;
     private Animator animator;
     
-    public int facingDirection = 0;
-    public int front = 0, back = 1, left = 2, right = 3;
+    private int front = 0, back = 1, left = 2, right = 3;
 
     // Start is called before the first frame update
     void Start()
     {
-        animator = GetComponent<Animator>(); 
+        animator = GetComponentInChildren<Animator>();
+        sprite = GetComponentInChildren<SpriteRenderer>();
         rigidBody = GetComponent<Rigidbody>();
     }
 
 
     void FixedUpdate()
     {
-        Physics.gravity = new Vector3(0, -75f, 0);
-
         Vector3 moveDirection = new Vector3(Input.GetAxis("Horizontal"), 0.0f, Input.GetAxis("Vertical"));
 
         animator.SetBool("isWalking", moveDirection != Vector3.zero);
@@ -38,16 +37,18 @@ public class PlayerHub : MonoBehaviour
         }
 
         if (moveDirection.x < 0) {
-            animator.SetInteger("facingDirection", left);
+            //animator.SetInteger("facingDirection", left);
+            sprite.flipX = false;
         } else if (moveDirection.x > 0) {
-            animator.SetInteger("facingDirection", right);
+            //animator.SetInteger("facingDirection", right);
+            sprite.flipX = true;
         }
 
         rigidBody.velocity = moveDirection * Time.deltaTime * speed;
 
-        if (Input.GetButtonDown("Jump") && isStanding) {
-            rigidBody.AddForce(new Vector3(0, 250, 0), ForceMode.Impulse);
-            isStanding = false;
+        if (isGrounded && Input.GetButtonDown("Jump")) {
+            rigidBody.AddForce(jumpImpulse * Vector3.up, ForceMode.VelocityChange);
+            isGrounded = false;
         }
 
         // print(rigidBody.velocity);
@@ -56,9 +57,9 @@ public class PlayerHub : MonoBehaviour
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.layer == 12)
-            {
-                isStanding = true;
-            }
+        {
+            isGrounded = true;
+        }
     }
 }
 

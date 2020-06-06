@@ -27,7 +27,7 @@ public class Interactable : MonoBehaviour
             onExitRange.Invoke();
         }
 
-        if (InsideRange() && Input.GetKeyDown(player.interactKey)) {
+        if (InsideRange() && Input.GetButton("Interact")) {
             onInteract.Invoke();
         }
     }
