@@ -103,7 +103,7 @@ public class Player : MonoBehaviour {
     public void TakeDamage(int damage)
     {
         playerCurrentHealth -= damage;
-        playerHealthBar.value = playerCurrentHealth;
+        playerHealthBar.value = (float)playerCurrentHealth / playerMaxHealth * 100;
         CreateAndDestroyLater(bloodEffect, 1);
         camAnim.SetTrigger("shake");
 
