@@ -34,4 +34,10 @@ public class Inventory
     {
         return Items.FindAll((Item) => Item.type == type);
     }
+
+    public void ResetListeners()
+    {
+        onChangeListeners.Clear();
+        newItemListeners.Clear();
+    }
 }

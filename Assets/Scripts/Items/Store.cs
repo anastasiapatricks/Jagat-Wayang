@@ -11,6 +11,7 @@ public class Store : MonoBehaviour
     {
         if (_instance != null && _instance != this)
         {
+            Instance.player.inventory.ResetListeners();
             Destroy(this.gameObject);
         }
         else
