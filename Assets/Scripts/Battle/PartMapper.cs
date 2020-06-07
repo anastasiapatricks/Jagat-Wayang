@@ -9,7 +9,6 @@ public class PartMapper : MonoBehaviour
     void Awake()
     {
         var partMap = Store.Instance.player.partMap;
-        print(partMap[WayangPart.Body].name);
         body.sprite = TextureHelper.GetSprite(
             partMap[WayangPart.Body].texture,
             body.sprite);
