@@ -129,6 +129,11 @@ public class Player : MonoBehaviour {
             // Disable enemy
     }
 
+    private void LoadPartsFromStore()
+    {
+
+    }
+
     private void CreateAndDestroyLater(GameObject prefab, float seconds)
     {
         GameObject clone = Instantiate(prefab, transform.position, Quaternion.identity);

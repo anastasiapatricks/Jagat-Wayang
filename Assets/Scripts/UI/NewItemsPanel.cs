@@ -11,7 +11,7 @@ public class NewItemsPanel : MonoBehaviour
     {
         canvasGroup = GetComponent<CanvasGroup>();
 
-        PlayerManager.Instance.inventory.AddNewItemListener((item) =>
+        Store.Instance.player.inventory.newItemListeners.Add((item) =>
         {
             GameObject itemIcon = InsertNewItem(item);
             StartCoroutine(RemoveItemLater(itemIcon, 300));

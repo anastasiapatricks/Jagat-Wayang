@@ -1,49 +1,32 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class ItemIcon : MonoBehaviour
 {
-    public GameObject toolTipPrefab;
-    public Vector3 toolTipOffset;
-
     public Item item;
+    public ToolTip toolTip;
+    public Button button;
 
-    private GameObject toolTip;
-    private CanvasGroup toolTipCanvas;
+    private Action<Item> callback;
 
-    public static GameObject Create(GameObject itemIconPrefab, Item item)
+    public static GameObject Create(GameObject itemIconPrefab, Item item, Action<Item> callback = null)
     {
-        GameObject itemIconClone = GameObject.Instantiate(itemIconPrefab);
+        GameObject itemIconClone = Instantiate(itemIconPrefab);
         ItemIcon itemIconComp = itemIconClone.GetComponent<ItemIcon>();
         itemIconComp.item = item;
+        itemIconComp.callback = callback;
         return itemIconClone;
     }
 
     void Start()
     {
-        GetComponent<Image>().sprite = item.Sprite;
-        if (toolTipPrefab != null)
+        GetComponent<Image>().sprite = item.sprite;
+        toolTip.Content = item.GetDescription();
+        if (callback != null)
         {
-            toolTip = Instantiate(toolTipPrefab, transform, false);
-            toolTip.transform.localPosition = toolTipOffset;
-            //print(item);
-
-            toolTip.GetComponent<ToolTip>().Item = item;
-            toolTipCanvas = toolTip.GetComponent<CanvasGroup>();
+            button.onClick.AddListener(() => callback(item));
         }
-        HideTextInfo();
-    }
-
-    public void ShowTextInfo()
-    {
-        toolTipCanvas.alpha = 1f;
-        toolTipCanvas.blocksRaycasts = true;
-    }
-    public void HideTextInfo()
-    {
-        toolTipCanvas.alpha = 0f;
-        toolTipCanvas.blocksRaycasts = false;
     }
 }

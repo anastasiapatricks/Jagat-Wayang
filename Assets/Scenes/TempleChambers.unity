@@ -8825,6 +8825,11 @@ PrefabInstance:
       propertyPath: back
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 173000115604783067, guid: 545aafa4b42bbde4aa7a3141e5f539d8,
+        type: 3}
+      propertyPath: jumpImpulse
+      value: 150
+      objectReference: {fileID: 0}
     - target: {fileID: 173000115604783068, guid: 545aafa4b42bbde4aa7a3141e5f539d8,
         type: 3}
       propertyPath: m_LocalPosition.x

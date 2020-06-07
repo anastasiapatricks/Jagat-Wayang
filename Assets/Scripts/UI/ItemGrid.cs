@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class ItemGrid : MonoBehaviour
@@ -10,39 +8,14 @@ public class ItemGrid : MonoBehaviour
     public GameObject emptyCellPrefab;
     public GameObject itemIconPrefab;
 
-    private Inventory inventory;
-    private Action<Item> newItemHandler;
-    private int inventoryStart;
+    private Item[] items;
+    private int startIndex;
 
-    void Start()
+    private Action<Item> itemCallback;
+
+    void Awake()
     {
-        //inventory = PlayerManager.Instance.inventory;
-
-        //FillCells();
-        //newItemHandler = (item) => UpdateCellContent();
-        //inventory.AddNewItemListener(newItemHandler);
-    }
-
-    public void NextPage()
-    {
-        inventoryStart += maxItems;
-        UpdateCellContent();
-    }
-
-    public void PreviousPage()
-    {
-        inventoryStart -= maxItems;
-        if (inventoryStart < 0) inventoryStart = 0;
-        UpdateCellContent();
-    }
-
-    private void OnDestroy()
-    {
-        inventory.RemoveListener(newItemHandler);
-    }
-
-    private void FillCells()
-    {
+        // Fill empty cell
         for (int i = 0; i < maxItems; i++)
         {
             GameObject cell = Instantiate(emptyCellPrefab, transform, false);
@@ -50,12 +23,35 @@ public class ItemGrid : MonoBehaviour
         }
     }
 
-    private void UpdateCellContent()
+    public void SetItemCallback(Action<Item> callback)
     {
-        Item[] items = inventory.Items.ToArray();
+        itemCallback = callback;
+    }
+
+    public void SetItems(Item[] items)
+    {
+        this.items = items;
+        UpdateCellContent();
+    }
+
+    public void NextPage()
+    {
+        startIndex += maxItems;
+        UpdateCellContent();
+    }
+
+    public void PreviousPage()
+    {
+        startIndex -= maxItems;
+        if (startIndex < 0) startIndex = 0;
+        UpdateCellContent();
+    }
+
+    public void UpdateCellContent()
+    {
         for (int i = 0; i < maxItems; i++)
         {
-            var invIndex = inventoryStart + i;
+            var invIndex = startIndex + i;
             SetItem(i, invIndex < items.Length ? items[invIndex] : null);
         }
     }
@@ -63,18 +59,13 @@ public class ItemGrid : MonoBehaviour
     private void SetItem(int i, Item item)
     {
         var cell = transform.GetChild(i);
-        if (cell.childCount > 0)
+        foreach (Transform child in cell)
         {
-            if (cell.GetChild(0).GetComponent<ItemIcon>().item == item)
-            {
-                return;
-            }
-            Destroy(cell.GetChild(0).gameObject);
+            Destroy(child.gameObject);
         }
-
         if (item != null)
         {
-            GameObject newContent = ItemIcon.Create(itemIconPrefab, item);
+            GameObject newContent = ItemIcon.Create(itemIconPrefab, item, itemCallback);
             newContent.transform.SetParent(cell, false);
         }
     }
