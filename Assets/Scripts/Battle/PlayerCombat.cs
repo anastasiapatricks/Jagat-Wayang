@@ -117,7 +117,6 @@ public class PlayerCombat : MonoBehaviour
                 {
                     print("combo " + i);
                     animator.SetInteger("AttackState", comboList[i].Item3);
-                    /*                Attack();*/
                     currentAudience += 15f;
                     audience.value = currentAudience;
                     inputHistory.Clear();
@@ -135,24 +134,10 @@ public class PlayerCombat : MonoBehaviour
         foreach (Collider2D enemy in hitEnemies)
         {
             enemy.GetComponent<Enemy>().TakeDamage(attackDamage);
-
-            enemy.GetComponent<Enemy>().knockbackCount = enemy.GetComponent<Enemy>().knockbackLength;
-
-            if (enemy.GetComponent<Enemy>().transform.position.x < transform.position.x)
-            {
-                enemy.GetComponent<Enemy>().knockFromRight = true;
-                print("knock from RIGHT");
-            }
-            else
-            {
-                enemy.GetComponent<Enemy>().knockFromRight = false;
-                print("knock from LEFT");
-            }
         }
 
         currentAudience += 0.1f;
         audience.value = currentAudience;
-
     }
 
     private void OnDrawGizmosSelected()

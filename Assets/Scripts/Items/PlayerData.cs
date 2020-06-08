@@ -58,19 +58,19 @@ public class PlayerData
 
         Item[] test = {
             new BlueprintItem(
-                "heh",
+                "Common",
                 PartType.Body,
                 new Attribute(50, 0),
                 Resources.Load<Texture2D>("Blueprints/body_blueprint"),
                 Resources.Load<Texture2D>("Blueprints/body_blueprint_mask")),
             new BlueprintItem(
-                "heh",
+                "Rare",
                 PartType.Body,
                 new Attribute(100, 0),
                 Resources.Load<Texture2D>("Blueprints/body_blueprint1"),
                 Resources.Load<Texture2D>("Blueprints/body_blueprint_mask")),
             new BlueprintItem(
-                "heh",
+                "Legendary Body",
                 PartType.Body,
                 new Attribute(200, 0),
                 Resources.Load<Texture2D>("Blueprints/body_blueprint2"),
@@ -84,13 +84,13 @@ public class PlayerData
         for (int i = 0; i < 3; i++)
         {
             inventory.Insert(new BlueprintItem(
-                "Test",
+                "Common",
                 PartType.UpperArm,
                 new Attribute(10, i * 5),
                 Resources.Load<Texture2D>("Blueprints/upper_arm0"),
                 Resources.Load<Texture2D>("Blueprints/upper_arm_mask")));
             inventory.Insert(new BlueprintItem(
-                "Test",
+                "Common",
                 PartType.LowerArm,
                 new Attribute(10, i * 5),
                 Resources.Load<Texture2D>("Blueprints/lower_arm0"),

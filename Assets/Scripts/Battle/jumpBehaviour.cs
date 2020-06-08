@@ -21,10 +21,7 @@ public class jumpBehaviour : StateMachineBehaviour
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-
-       //if (playerPos != null)
-            playerPos = GameObject.FindWithTag("Player").GetComponent<Transform>();
-
+        playerPos = GameObject.FindWithTag("Player").GetComponent<Transform>();
 
         timer = Random.Range(minTime, maxTime);
     }
