@@ -37,6 +37,26 @@ public static class Shape
         new Vector2(0.11f, 0.08f)
     };
 
+    public static Vector2[] heh =
+    {
+        new Vector2(0.26f, 0.06f),
+        new Vector2(0.75f, 0.06f),
+        new Vector2(1f, 0.5f),
+        new Vector2(0.7f, 0.82f),
+        new Vector2(0.49f, 0.56f),
+        new Vector2(0.06f, 0.52f)
+    };
+
+    public static Vector2[] hexagon =
+    {
+        new Vector2(0.06f, 0.29f),
+        new Vector2(0.5f, 0.11f),
+        new Vector2(0.93f, 0.31f),
+        new Vector2(0.91f, 0.7f),
+        new Vector2(0.49f, 0.92f),
+        new Vector2(0.06f, 0.67f)
+    };
+
     public static bool[,] PolygonFillMask(
         int height, int width, Vector2[] templatePoints, bool isPointNormalized = false)
     {
